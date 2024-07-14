@@ -2,13 +2,13 @@ version: '3'
 
 services:
   medical-clinic:
-    build:
-     context: .
-     dockerfile: Dockerfile
+    image: medical-clinic:latest
     ports:
-      - "8082:8080"
+      - "8080:8080"
     depends_on:
       - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/medical-clinic
     networks:
       - med-network
 
@@ -18,6 +18,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
+    environment:
+      SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_MEDICAL_MEDICAL-CLINIC_URL: http://medical-clinic:8080
     depends_on:
       - medical-clinic
     networks:
@@ -34,8 +36,21 @@ services:
     networks:
       - med-network
 
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - med-network
+
 volumes:
   postgres_data:
+
 networks:
   med-network:
     driver: bridge

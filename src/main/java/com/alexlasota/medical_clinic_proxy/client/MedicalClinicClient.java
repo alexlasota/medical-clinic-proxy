@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@FeignClient(name = "medical-clinic", url = "http://localhost:8080", fallback = MedicalClinicFallback.class)
+@FeignClient(name = "medical-clinic", url = "medical-clinic", fallback = MedicalClinicFallback.class)
 public interface MedicalClinicClient {
 
     @GetMapping("/visits/patient/{patientId}")
@@ -15,7 +15,6 @@ public interface MedicalClinicClient {
 
     @PatchMapping("/visits/{visitId}/patients/{patientId}")
     VisitDto assignPatientToVisit(@PathVariable Long visitId, @PathVariable Long patientId);
-
 
     @GetMapping("/visits/doctor/{doctorId}/available")
     List<VisitDto> getAvailableVisitsByDoctorId(@PathVariable Long doctorId);
