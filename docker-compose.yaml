@@ -17,9 +17,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8081:8081"
+      - "8081:8080"
     environment:
-      SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_MEDICAL_MEDICAL-CLINIC_URL: http://medical-clinic:8080
+      MEDICAL_CLINIC_URL: http://medical-clinic:8080
+#      SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_MEDICAL_MEDICAL-CLINIC_URL: http://medical-clinic:8080
     depends_on:
       - medical-clinic
     networks:

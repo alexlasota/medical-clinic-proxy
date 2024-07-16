@@ -3,7 +3,7 @@ package com.alexlasota.medical_clinic_proxy.client;
 import com.alexlasota.medical_clinic_proxy.model.VisitDto;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class MedicalClinicFallback implements MedicalClinicClient {
     }
 
     @Override
-    public List<VisitDto> getAvailableVisitsBySpecializationAndDate(String specialization, LocalDateTime startDate, LocalDateTime endDate) {
+    public List<VisitDto> getAvailableVisitsBySpecializationAndDate(String specialization, LocalDate date) {
         return Collections.emptyList();
     }
 }

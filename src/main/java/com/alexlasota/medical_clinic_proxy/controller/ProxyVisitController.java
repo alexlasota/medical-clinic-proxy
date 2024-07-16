@@ -4,7 +4,7 @@ import com.alexlasota.medical_clinic_proxy.model.VisitDto;
 import com.alexlasota.medical_clinic_proxy.service.ProxyVisitService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,7 +22,7 @@ public class ProxyVisitController {
         return proxyVisitService.getVisitsByPatientId(patientId);
     }
 
-    @PatchMapping("/{visitId}/patients/{patientId}")
+    @RequestMapping(value = "/visits/{visitId}/patients/{patientId}", method = RequestMethod.PATCH)
     public VisitDto assignPatientToVisit(@PathVariable Long visitId, @PathVariable Long patientId) {
         return proxyVisitService.assignPatientToVisit(visitId, patientId);
     }
@@ -33,7 +33,7 @@ public class ProxyVisitController {
     }
 
     @GetMapping("/specialization/{specialization}/date")
-    public List<VisitDto> getAvailableVisitsBySpecializationAndDate(@PathVariable String specialization, @RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate) {
-        return proxyVisitService.getAvailableVisitsBySpecializationAndDate(specialization, startDate, endDate);
+    public List<VisitDto> getAvailableVisitsBySpecializationAndDate(@PathVariable String specialization, @RequestParam LocalDate date) {
+        return proxyVisitService.getAvailableVisitsBySpecializationAndDate(specialization, date);
     }
 }
