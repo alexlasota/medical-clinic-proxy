@@ -2,6 +2,7 @@ package com.alexlasota.medical_clinic_proxy.controller;
 
 import com.alexlasota.medical_clinic_proxy.model.VisitDto;
 import com.alexlasota.medical_clinic_proxy.service.ProxyVisitService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -9,13 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/proxy/visits")
+@RequiredArgsConstructor
 public class ProxyVisitController {
 
     private final ProxyVisitService proxyVisitService;
-
-    public ProxyVisitController(ProxyVisitService proxyVisitService) {
-        this.proxyVisitService = proxyVisitService;
-    }
 
     @GetMapping("/patient/{patientId}")
     public List<VisitDto> getVisitsByPatientId(@PathVariable Long patientId) {

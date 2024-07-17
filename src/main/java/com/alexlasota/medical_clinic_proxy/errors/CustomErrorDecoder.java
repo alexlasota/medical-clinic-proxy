@@ -14,7 +14,7 @@ public class CustomErrorDecoder implements ErrorDecoder {
         return switch (response.status()) {
             case 400 -> new IllegalArgumentException("Bad request: " + response.request().url());
             case 404 -> new ChangeSetPersister.NotFoundException();
-            case 500 -> new RetryableException(
+            case 503 -> new RetryableException(
                     response.status(),
                     "Internal Server Error",
                     response.request().httpMethod(),
